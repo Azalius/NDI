@@ -13,11 +13,26 @@
   </head>
 
   <body style="padding:20px;">
+
+    <form method="GET">
+        <div class="input-group mb-3">
+            <select class="custom-select" name="spot">
+                <%= spots %>
+                <% for(var i = 0; i < spots.length; i++) {%>
+                    <option value="<%= spots[i]._id %>"><%= spots[i].ville %> : <%= spots[i].spot %></option>
+                <% } %>
+            </select>
+            <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Valider</button>
+            </div>
+        </div>
+    </form>
+
     <div class="row">
     <% for(var i = 0; i < reviews.length; i++) {%>
         
         <div class="col-sm-4">
-            <div class="card text-center">
+            <div class="card text-center" style="margin-bottom: 20px;">
                 <div class="card-header">
                     <% for(var j = 0; j < 5; j++) {%>
                         <%if (reviews[i].note > j*2+1){ %>

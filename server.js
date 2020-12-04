@@ -17,7 +17,9 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
   app.get('/', (req, res) => {
     rev = dbReview.find()
     rev.toArray().then(results=>{
-      res.render('index.ejs', {reviews:results})
+      spots=dbSpot.find().toArray().then(spots=>{
+        res.render('index.ejs', {reviews:results, spots:spots, spot:req.query.spot})
+      }).catch(error => console.error(error))
     })
     .catch(error => console.error(error))
 
