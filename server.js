@@ -13,19 +13,18 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
   const dbReview = db.collection('review')
  console.log('Connected to Database')
 
-app.set('view engine', 'ejs')
-app.get('/', (req, res) => {
-  rev = dbReview.find()
-  //console.log(rev)
-  rev.toArray().then(results=>{
-    console.log(results)
+  app.set('view engine', 'ejs')
+  app.get('/', (req, res) => {
+    rev = dbReview.find()
+    rev.toArray().then(results=>{
+      res.render('index.ejs', {reviews:results})
+    })
+    .catch(error => console.error(error))
+
   })
-  .catch(error => console.error(error))
 
-})
-
-app.listen(3000, function() {
-  console.log('listening on 3000')
+  app.listen(3000, function() {
+    console.log('listening on 3000')
 })
 
 }).catch(error => console.error(error))
